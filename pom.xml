@@ -22,6 +22,10 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <!-- Properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <!-- =============================================================== -->
     <!-- Build Settings -->
     <!-- =============================================================== -->
