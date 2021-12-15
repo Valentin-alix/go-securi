@@ -4,22 +4,112 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
+    <!-- =============================================================== -->
+    <!-- The Basics -->
+    <!-- =============================================================== -->
+    <!-- Maven Coordinates -->
+    <groupId>com.formation.epsi.gosecu</groupId>
     <artifactId>go-secu</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <!-- Packaging -->
+    <packaging>jar</packaging>
+    <!-- Dependencies -->
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <!-- =============================================================== -->
+    <!-- Build Settings -->
+    <!-- =============================================================== -->
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>11</source>
-                    <target>11</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-        </plugins>
+        <!-- Plugin Management -->
+        <pluginManagement>
+            <plugins>
+                <!-- Build a JAR from the current project -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <mainClass>com.formation.epsi.gosecuri.Main</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <!--  Compiles Java sources  -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <source>11</source>
+                        <target>11</target>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+                <!-- Generate Javadocs -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.3.1</version>
+                    <executions>
+                        <execution>
+                            <id>javadoc-jar</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <!-- Generate a site -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.9.1</version>
+                    <configuration>
+                        <locales>fr</locales>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+
+    <!-- =============================================================== -->
+    <!-- More Project Information -->
+    <!-- =============================================================== -->
+    <name>Go Securi</name>
+    <description>Application de vérification de l’accès à un local, ainsi que la visualisation de l’affectation du matériel aux agents de l’entreprise Go Securi</description>
+    <!-- Organization -->
+    <organization>
+        <name>EPSI - Campus de Rennes</name>
+        <url>https://www.epsi.fr/campus/campus-de-rennes/</url>
+    </organization>
+    <!-- Developers -->
+    <developers>
+        <developer>
+            <id>alix</id>
+            <name>Valentin ALIX</name>
+            <organization>EPSI - Campus de Rennes</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>challe</id>
+            <name>Samuel CHALLE</name>
+            <organization>EPSI - Campus de Rennes</organization>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
 </project>
