@@ -15,8 +15,8 @@ import java.util.Scanner;
 public class Staff {
     List<Guard> guards = new ArrayList<>();
 
-    public Staff(String staffData) throws FileNotFoundException {
-        try (Scanner scan = new Scanner(new File(staffData))) {
+    public Staff(String dataDir, String dataFile) throws FileNotFoundException {
+        try (Scanner scan = new Scanner(new File(dataDir+dataFile))) {
             scan.useLocale(Locale.FRANCE);
             while (scan.hasNext()) {
                 Guard guard = new Guard();
