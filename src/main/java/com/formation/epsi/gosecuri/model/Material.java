@@ -8,11 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Material {
-
     private String id;
     private String name;
-
-    public String toString() {
-        return "";
-    }
 }
