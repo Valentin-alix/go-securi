@@ -10,16 +10,10 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Guard {
-
     private String id;
     private String firstname;
     private String lastname;
-    private String fullname;
     private String job;
     private String password;
     private List<Material> materials;
-
-    public String toString() {
-        return "";
-    }
 }
