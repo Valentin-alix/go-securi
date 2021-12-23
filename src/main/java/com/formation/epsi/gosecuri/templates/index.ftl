@@ -2,8 +2,8 @@
 
     <@b.page>
         <ul>
-            <#list guards as guard>
-            <li><a href="${guard.id}.html">${guard.id}</a></li>
+            <#list guards?sort_by("firstname") as guard>
+            <li><a href="${guard.id}.html">${guard.firstname} ${guard.lastname}</a></li>
             </#list>
         </ul>
     </@b.page>
