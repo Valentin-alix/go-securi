@@ -6,16 +6,19 @@ import freemarker.template.TemplateExceptionHandler;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FreemarkerConfigurationFactory {
 
-    /* Templates */
-    static String TEMPLATES_PATH = "E:/www/epsi/mspr_tpre500/go-securi-appli/src/main/java/com/formation/epsi/gosecuri/templates";
+    private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
     public static Configuration create() throws IOException {
+        // Get data from properties file
+        String templatesPath = resource.getString("templates.path");
+
         /* Create and adjust the configuration singleton */
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_29);
-        cfg.setDirectoryForTemplateLoading(new File(TEMPLATES_PATH));
+        cfg.setDirectoryForTemplateLoading(new File(templatesPath));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setLocale(Locale.FRANCE);
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
