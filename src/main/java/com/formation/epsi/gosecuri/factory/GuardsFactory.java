@@ -6,20 +6,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class GuardsFactory {
 
-    /* Data */
-    static String DATA_DIR = "E:/www/epsi/mspr_tpre500/go-securi-data/";
-    static String DATA_FILE = "staff.txt";
+    private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
     public static List<Guard> create() throws IOException {
+        // Get data from properties file
+        String dataDir = resource.getString("data.dir");
+        String dataFile = resource.getString("data.file");
+
         /* Create a list of guards */
         List<Guard> guards = new ArrayList<>();
 
         /* Scanning staff txt file */
-        String staffData = DATA_DIR+DATA_FILE;
+        String staffData = dataDir+dataFile;
 
         try (Scanner staffDataScan = new Scanner(new File(staffData))) {
             while (staffDataScan.hasNext()) {
@@ -33,7 +36,7 @@ public class GuardsFactory {
                 String shortname = staffDataScan.nextLine().trim();
 
                 /* A filename is generated */
-                String guardData = DATA_DIR+shortname+".txt";
+                String guardData = dataDir+shortname+".txt";
                 File guardDataFile = new File(guardData);
 
                 /* Scanning txt file of each guard */
