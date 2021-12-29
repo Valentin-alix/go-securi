@@ -7,14 +7,11 @@ import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class IndexPageFactory {
 
-    /* Templates */
-    static String TEMPLATE_INDEX = "index.ftl";
-
-    /* Target */
-    static String TARGET_INDEX = "index.html";
+    private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
     /**
      *
@@ -23,11 +20,15 @@ public class IndexPageFactory {
      * @return boolean
      */
     public static boolean create(Configuration cfg, Staff staff) throws TemplateException, IOException {
+        // Get data from properties file
+        String templateIndex = resource.getString("template.index");
+        String targetIndex = resource.getString("target.index");
+
         Map<String, Object> indexData = new HashMap<>();
         indexData.put("title", "Liste des agents");
         indexData.put("guards", staff.getGuards());
 
-        HtmlFactory.create(cfg, indexData, TEMPLATE_INDEX, TARGET_INDEX);
+        HtmlFactory.create(cfg, indexData, templateIndex, targetIndex);
 
         return true;
     }
