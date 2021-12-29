@@ -8,19 +8,22 @@ import freemarker.template.TemplateException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public class GuardsPageFactory {
 
-    /* Templates */
-    static String TEMPLATE_GUARD = "guard.ftl";
+    private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
     public static void create(Configuration cfg, Staff staff) throws TemplateException, IOException {
+        // Get data from properties file
+        String templateGuard = resource.getString("template.guard");
+
         for (Guard guard : staff.getGuards()) {
             Map<String, Object> guardData = new HashMap<>();
             guardData.put("title", guard.getId());
             guardData.put("guard", guard);
 
-            HtmlFactory.create(cfg, guardData, TEMPLATE_GUARD, String.format("%s.html", guard.getId()));
+            HtmlFactory.create(cfg, guardData, templateGuard, String.format("%s.html", guard.getId()));
         }
     }
 }
