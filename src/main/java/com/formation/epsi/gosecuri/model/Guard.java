@@ -15,5 +15,5 @@ public class Guard {
     private String lastname;
     private String job;
     private String password;
-    private List<Material> materials;
+    private List<Equipment> equipments;
 }
