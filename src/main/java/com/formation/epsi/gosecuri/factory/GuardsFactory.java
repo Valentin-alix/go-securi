@@ -1,7 +1,7 @@
 package com.formation.epsi.gosecuri.factory;
 
+import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
-import com.formation.epsi.gosecuri.model.Material;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,7 @@ public class GuardsFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
-    public static List<Guard> create(Material material) throws IOException {
+    public static List<Guard> create(List<Equipment> equipments) throws IOException {
         // Get data from properties file
         String dataDir = resource.getString("data.dir");
         String dataFileStaff = resource.getString("data.file.staff");
