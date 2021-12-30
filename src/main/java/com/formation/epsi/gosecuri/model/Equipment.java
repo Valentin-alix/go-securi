@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Material {
+public class Equipment {
     private String id;
     private String name;
 }
