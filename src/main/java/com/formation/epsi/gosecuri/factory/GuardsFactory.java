@@ -5,16 +5,13 @@ import com.formation.epsi.gosecuri.model.Guard;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class GuardsFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
-    public static List<Guard> create(List<Equipment> equipments) throws IOException {
+    public static List<Guard> create(HashMap<String, Equipment> equipments) throws IOException {
         // Get data from properties file
         String dataDir = resource.getString("data.dir");
         String dataFileStaff = resource.getString("data.file.staff");
@@ -28,16 +25,17 @@ public class GuardsFactory {
         try (Scanner staffDataScan = new Scanner(new File(staffData))) {
             while (staffDataScan.hasNext()) {
                 /* Initialize variable */
-                String lastname = null;
-                String firstname = null;
-                String job = null;
-                String password = null;
+                String guardLastname = null;
+                String guardFirstname = null;
+                String guardJob = null;
+                String guardPassword = null;
+                List<Equipment> guardEquipments = new ArrayList<>();
 
                 /* The shortname of the guard is retrieved */
-                String shortname = staffDataScan.nextLine().trim();
+                String guardShortname = staffDataScan.nextLine().trim();
 
                 /* A filename is generated */
-                String guardData = dataDir+shortname+".txt";
+                String guardData = dataDir+guardShortname+".txt";
                 File guardDataFile = new File(guardData);
 
                 /* Scanning txt file of each guard */
@@ -54,18 +52,24 @@ public class GuardsFactory {
                         /* the data is retrieved */
                         String data = guardDataScan.nextLine().trim();
                         if (i == 1) {
-                            lastname = data;
+                            guardLastname = data;
                         } else if (i == 2) {
-                            firstname = data;
+                            guardFirstname = data;
                         } else if (i == 3) {
-                            job = data;
+                            guardJob = data;
                         } else if (i == 4) {
-                            password = data;
+                            guardPassword = data;
+                        } else if (i >= 6) {
+                            try {
+                                Equipment equipment = equipments.get(data);
+                                guardEquipments.add(equipment);
+                            } catch (Exception ignored) {
+                            }
                         }
                     }
 
                     /* Create a new guard */
-                    Guard guard = GuardFactory.create(shortname, lastname, firstname, job, password);
+                    Guard guard = GuardFactory.create(guardShortname, guardLastname, guardFirstname, guardJob, guardPassword, guardEquipments);
 
                     guardDataScan.close();
 
