@@ -6,9 +6,9 @@ public class EquipmentFactory {
 
     /**
      *
-     * @param id id
-     * @param name name
-     * @return Material
+     * @param id Id  of the equipment
+     * @param name Name of the equipment
+     * @return Equipment
      */
     public static Equipment create(String id, String name){
         Equipment equipment = new Equipment();
