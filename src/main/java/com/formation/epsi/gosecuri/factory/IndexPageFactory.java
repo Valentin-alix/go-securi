@@ -28,8 +28,6 @@ public class IndexPageFactory {
         indexData.put("title", "Liste des agents");
         indexData.put("guards", staff.getGuards());
 
-        HtmlFactory.create(cfg, indexData, templateIndex, targetIndex);
-
-        return true;
+        return HtmlFactory.create(cfg, indexData, templateIndex, targetIndex);
     }
 }
