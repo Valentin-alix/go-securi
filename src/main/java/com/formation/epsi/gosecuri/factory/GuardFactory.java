@@ -10,11 +10,11 @@ public class GuardFactory {
 
     /**
      *
-     * @param shortname shortname
-     * @param lastname lastname
-     * @param firstname firstname
-     * @param job job
-     * @param password password
+     * @param shortname Guard’s shortname
+     * @param lastname Guard’s lastname
+     * @param firstname Guard’s firstname
+     * @param job Guard’s job
+     * @param password Guard’s password
      * @return Guard
      */
     public static Guard create(String shortname, String lastname, String firstname, String job, String password, List<Equipment> equipments) {
