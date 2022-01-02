@@ -10,6 +10,10 @@ public class EquipmentsFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
+    /**
+     *
+     * @return HashMap of equipments
+     */
     public static HashMap<String, Equipment> create() throws IOException {
         // Get data from properties file
         String dataDir = resource.getString("data.dir");
