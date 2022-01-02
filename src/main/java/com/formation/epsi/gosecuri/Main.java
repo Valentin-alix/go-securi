@@ -14,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, TemplateException {
 		/* Create the equipments */
-		List<Equipment> equipments = EquipmentsFactory.create();
+		HashMap<String, Equipment> equipments = EquipmentsFactory.create();
 
 		/* Create the guards */
 		List<Guard> guards = GuardsFactory.create(equipments);
