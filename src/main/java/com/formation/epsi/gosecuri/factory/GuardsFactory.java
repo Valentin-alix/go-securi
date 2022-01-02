@@ -11,6 +11,11 @@ public class GuardsFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
+    /**
+     *
+     * @param equipments HashMap
+     * @return List of guards
+     */
     public static List<Guard> create(HashMap<String, Equipment> equipments) throws IOException {
         // Get data from properties file
         String dataDir = resource.getString("data.dir");
