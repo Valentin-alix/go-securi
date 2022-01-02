@@ -13,6 +13,14 @@ public class HtmlFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 
+    /**
+     *
+     * @param cfg Freemarker configuration
+     * @param templateData Map of data
+     * @param templateName The name of the template file.ftl
+     * @param targetFileName The name of the target file.html
+     * @return boolean
+     */
     public static boolean create(Configuration cfg, Object templateData, String templateName, String targetFileName) throws IOException, TemplateException {
         // Get data from properties file
         String targetDir = resource.getString("target.dir");
