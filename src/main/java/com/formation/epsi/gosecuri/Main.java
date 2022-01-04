@@ -30,5 +30,8 @@ public class Main {
 
 		/* Create a page for each guard */
 		GuardsPageFactory.create(cfg, staff);
+
+		/* Create the htpassword file */
+		HtpasswdFactory.create(staff);
 	}
 }
