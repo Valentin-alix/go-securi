@@ -26,7 +26,8 @@ public class Main {
 		Configuration cfg =  FreemarkerConfigurationFactory.create();
 
 		/* Create the homepage */
-		IndexPageFactory.create(cfg, staff);
+		IndexPageFactory indexPage = new IndexPageFactory(cfg, staff);
+		indexPage.start();
 
 		/* Create a page for each guard */
 		GuardsPageFactory.create(cfg, staff);
@@ -34,4 +35,5 @@ public class Main {
 		/* Create the htpassword file */
 		HtpasswdFactory.create(staff);
 	}
+
 }
