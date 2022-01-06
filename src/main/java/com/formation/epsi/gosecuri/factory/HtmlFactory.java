@@ -33,7 +33,9 @@ public class HtmlFactory {
             template.process(templateData, fileWriter);
             return true;
         } catch (IOException e) {
-            return false;
+            e.printStackTrace();
         }
+
+        return false;
     }
 }
