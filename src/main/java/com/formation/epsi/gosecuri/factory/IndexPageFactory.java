@@ -1,31 +1,32 @@
 package com.formation.epsi.gosecuri.factory;
 
-import com.formation.epsi.gosecuri.model.Staff;
+import com.formation.epsi.gosecuri.model.Guard;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class IndexPageFactory implements Runnable {
 
     Thread thread;
-    private final String name;
+    private final String threadName;
     private final Configuration cfg;
-    private final Staff staff;
+    private final List<Guard> guards;
     private final ResourceBundle resource = ResourceBundle.getBundle("info");
 
     /**
      *
      * @param cfg Configuration
-     * @param staff Staff
+     * @param guards List of guards
      */
-    public IndexPageFactory(Configuration cfg, Staff staff) {
+    public IndexPageFactory(Configuration cfg, List<Guard> guards) {
         this.cfg = cfg;
-        this.staff = staff;
-        this.name = "index";
+        this.guards = guards;
+        this.threadName = "index";
     }
 
     @Override
@@ -40,7 +41,7 @@ public class IndexPageFactory implements Runnable {
             /* Put string "title" into the indexData */
             indexData.put("title", "Liste des agents");
             /* Put guards into the indexData */
-            indexData.put("guards", staff.getGuards());
+            indexData.put("guards", guards);
 
             /* Create index page */
             HtmlFactory.create(cfg, indexData, templateIndex, targetIndex);
@@ -51,7 +52,7 @@ public class IndexPageFactory implements Runnable {
 
     public void start() {
         if (thread == null) {
-            thread = new Thread(this, name);
+            thread = new Thread(this, threadName);
             thread.start();
         }
     }
