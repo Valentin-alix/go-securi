@@ -3,7 +3,6 @@ package com.formation.epsi.gosecuri.factory;
 import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GuardFactory {
