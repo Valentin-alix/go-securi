@@ -68,7 +68,8 @@ public class GuardsFactory {
                             try {
                                 Equipment equipment = equipments.get(data);
                                 guardEquipments.add(equipment);
-                            } catch (Exception ignored) {
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
                         }
                     }
