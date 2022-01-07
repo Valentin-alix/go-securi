@@ -9,4 +9,5 @@
                 <#if equipment??><li>${equipment.name}</li><#else>erreur, cet équipement n’existe pas</#if>
             </#list>
         </ul>
+        <a href="index.html">Retour à l’accueil</a>
     </@b.page>
