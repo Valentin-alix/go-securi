@@ -3,6 +3,7 @@ package com.formation.epsi.gosecuri;
 import com.formation.epsi.gosecuri.factory.*;
 import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
+import com.formation.epsi.gosecuri.util.CopyCardsId;
 
 import java.io.*;
 import java.util.*;
@@ -19,7 +20,7 @@ public class Main {
 		List<Guard> guards = GuardsFactory.create(equipments);
 
 		/* Create freemarker configuration */
-		Configuration cfg =  FreemarkerConfigurationFactory.create();
+		Configuration cfg = FreemarkerConfigurationFactory.create();
 
 		/* Create the homepage */
 		IndexPageFactory indexPage = new IndexPageFactory(cfg, guards);
@@ -31,9 +32,14 @@ public class Main {
 			guardPage.start();
 		}
 
+		/* Copy cards id */
+		CopyCardsId copyCardsId = new CopyCardsId(guards);
+		copyCardsId.start();
+
 		/* Create the htpassword file */
 		HtpasswdFactory htpasswd = new HtpasswdFactory(guards);
 		htpasswd.start();
 	}
-
 }
+
+
