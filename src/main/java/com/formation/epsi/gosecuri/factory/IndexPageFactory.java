@@ -39,7 +39,7 @@ public class IndexPageFactory implements Runnable {
             /* Create the indexData hash */
             Map<String, Object> indexData = new HashMap<>();
             /* Put string "title" into the indexData */
-            indexData.put("title", "Liste des agents");
+            indexData.put("title", "Accueil");
             /* Put guards into the indexData */
             indexData.put("guards", guards);
 
