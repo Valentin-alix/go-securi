@@ -36,7 +36,7 @@ public class GuardPageFactory implements Runnable {
             /* Create the guardData hash */
             Map<String, Object> guardData = new HashMap<>();
             /* Put string "title" into the guardData */
-            guardData.put("title", guard.getId());
+            guardData.put("title", "Fiche agent");
             /* Put guard into the guardData */
             guardData.put("guard", guard);
 
