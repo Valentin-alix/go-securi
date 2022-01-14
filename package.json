@@ -1,0 +1,16 @@
+{
+  "name": "gosecuri",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "sass --watch ./src/main/sass/main.scss:./public/css/style.css",
+    "build": "sass ./src/main/sass/main.scss:./public/css/style.css --style compressed"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.1.3",
+    "sass": "^1.48.0"
+  }
+}
