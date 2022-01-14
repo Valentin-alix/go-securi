@@ -173,24 +173,6 @@
                     </execution>
                 </executions>
             </plugin>
-            <!-- A Maven plugin that allows to compile SASS using Dart Sass -->
-            <plugin>
-                <groupId>io.github.cleydyr</groupId>
-                <artifactId>dart-sass-maven-plugin</artifactId>
-                <version>0.1.0</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>compile-sass</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <inputFolder>${basedir}/src/main/sass/</inputFolder>
-                    <outputFolder>${basedir}/out/css/</outputFolder>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
     <!-- Reporting -->
