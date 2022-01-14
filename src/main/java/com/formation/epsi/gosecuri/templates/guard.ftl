@@ -20,7 +20,7 @@
                 <div class="col-sm-12 col-md-6">
                     <ul>
                         <#list guard.equipments as equipment>
-                            <#if equipment??><li class="guard__check-left">${equipment.name}</li><#else>erreur, cet équipement n’existe pas</#if>
+                        <#if equipment??><li class="guard__check-left">${equipment.name}</li><#else>erreur, cet équipement n’existe pas</#if>
                         </#list>
                     </ul>
                 </div>
