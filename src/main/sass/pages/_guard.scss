@@ -1,0 +1,35 @@
+.guard {
+  &__heading {
+    text-align: center;
+    padding: 10px;
+  }
+  &__name {
+    @include media-breakpoint-down(md) {
+      text-align: center;
+    }
+    @include media-breakpoint-up(md) {
+      text-align: left;
+    }
+  }
+  &__job {
+    @include media-breakpoint-down(md) {
+      text-align: center;
+    }
+    @include media-breakpoint-up(md) {
+      text-align: left;
+    }
+  }
+  &__check-left {
+    text-align: right;
+    list-style-type: none;
+    padding-right: 20px;
+    position: relative;
+  }
+  &__check-left:after {
+    content: "🗹";
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
