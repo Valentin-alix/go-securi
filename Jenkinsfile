@@ -9,12 +9,12 @@ node {
         sh "chmod +x ./mvnw"
     }
     stage('Build'){
-        withEnv(["PATH+jdk=${tool 'JAVA 17'}/bin"]){
+        withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             sh "./mvnw compile"
         }
     }
     stage('Unit-Tests') {
-        withEnv(["PATH+jdk=${tool 'JAVA 17'}/bin"]){
+        withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             if (env.SKIP_TESTS){
                 sh "./mvnw test"
             }
