@@ -1,21 +1,26 @@
 package com.formation.epsi.gosecuri;
 
-import com.formation.epsi.gosecuri.factory.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
+import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
+import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
+import com.formation.epsi.gosecuri.factory.GuardPageFactory;
+import com.formation.epsi.gosecuri.factory.GuardsFactory;
+import com.formation.epsi.gosecuri.factory.HtpasswdFactory;
+import com.formation.epsi.gosecuri.factory.IndexPageFactory;
 import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
 import com.formation.epsi.gosecuri.util.CopyCardsId;
 
-import java.io.*;
-import java.util.*;
-
-import freemarker.template.*;
+import freemarker.template.Configuration;
 
 public class Main {
 
 	public static void main(String[] args) throws IOException {
 		/* Create the equipments */
 		HashMap<String, Equipment> equipments = EquipmentsFactory.create();
-
 		/* Create the guards */
 		List<Guard> guards = GuardsFactory.create(equipments);
 
@@ -41,5 +46,3 @@ public class Main {
 		htpasswd.start();
 	}
 }
-
-

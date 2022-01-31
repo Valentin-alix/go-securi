@@ -1,0 +1,140 @@
+package com.formation.epsi.gosecuri;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+import java.util.Scanner;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
+import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
+import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
+import com.formation.epsi.gosecuri.factory.GuardPageFactory;
+import com.formation.epsi.gosecuri.factory.GuardsFactory;
+import com.formation.epsi.gosecuri.factory.HtmlFactory;
+import com.formation.epsi.gosecuri.factory.IndexPageFactory;
+import com.formation.epsi.gosecuri.model.Equipment;
+import com.formation.epsi.gosecuri.model.Guard;
+
+import freemarker.template.Configuration;
+import freemarker.template.TemplateException;
+
+class Tests {
+
+	// Récupération des données de info.properties
+	private static final ResourceBundle resource = ResourceBundle.getBundle("info");
+	static String templateIndex = resource.getString("template.index");
+	static String targetIndex = resource.getString("target.index");
+	static String targetData = resource.getString("target.dir");
+
+	static HashMap<String, Equipment> equipments = null;
+	static List<Guard> guards = null;
+	static Configuration cfg = null;
+	static IndexPageFactory indexPage = null;
+
+	@BeforeAll
+	public static void setUp() throws IOException {
+		equipments = EquipmentsFactory.create();
+		guards = GuardsFactory.create(equipments);
+		cfg = FreemarkerConfigurationFactory.create();
+		indexPage = new IndexPageFactory(cfg, guards);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "lampe, Lampe Torche", "cyno, Bandeau agent cynophile" })
+	public void createEquipments(String input, String expected) {
+		/* test return name of equipments */
+		assertEquals(equipments.get(input).getName(), expected);
+	}
+
+	@ParameterizedTest
+	@CsvSource({ "0, Corinne, Berthier, Surveillance entrepôt, pmNd1ldFE7WTk" })
+	public void createGuards(int input, String expectedFirstname, String expectedLastname, String expectedJob,
+			String expectedPassword) {
+		/* test return values of GuardsFactory */
+		assertEquals(guards.get(input).getFirstname(), expectedFirstname);
+		assertEquals(guards.get(input).getLastname(), expectedLastname);
+		assertEquals(guards.get(input).getJob(), expectedJob);
+		assertEquals(guards.get(input).getPassword(), expectedPassword);
+
+	}
+
+	@Disabled
+	@Test
+	public void createHtml() throws IOException, TemplateException {
+		// Test relative to the HtmlFactory create function
+		Map<String, Object> indexData = new HashMap<>();
+		indexData.put("title", "Accueil");
+		indexData.put("guards", guards);
+		assertTrue(HtmlFactory.create(cfg, indexData, templateIndex, targetIndex));
+	}
+
+	@Test
+	public void createIndexPage() throws IOException, InterruptedException {
+		// Tests relative to the IndexPage
+
+		indexPage.start();
+
+		while (Thread.activeCount() != 3) {
+			Thread.sleep(1);
+		}
+		int nbGuardsInIndexPage = 0;
+
+		ArrayList<String> guardsName = new ArrayList<String>();
+
+		for (int i = 0; i < guards.size(); i++) {
+			guardsName.add(guards.get(i).getLastname());
+		}
+
+		File indexfile = new File(targetData + targetIndex);
+		Scanner scanner = new Scanner(indexfile);
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			if (line.contains(".html")) {
+				nbGuardsInIndexPage++;
+			}
+
+			for (int i = 0; i < guardsName.size(); i++) {
+				if (line.contains(guardsName.get(i))) {
+					guardsName.remove(i);
+				}
+			}
+		}
+		scanner.close();
+
+		// Test if index.html contains the good number of html links
+		assertEquals(nbGuardsInIndexPage - 1, guards.size());
+		// Test if we find the name corresponding to guards name
+		assertEquals(guardsName.size(), 0);
+
+	}
+
+	@Test
+	public void createGuardsPage() throws InterruptedException {
+		// Tests guardsPage
+
+		for (Guard guard : guards) {
+			GuardPageFactory guardPage = new GuardPageFactory(cfg, guard);
+			guardPage.start();
+		}
+
+	}
+
+	// Tests Copy Cards ID et HtPassword ?
+
+	// Tests corresponding names and file
+
+	// Tests thread
+
+}
