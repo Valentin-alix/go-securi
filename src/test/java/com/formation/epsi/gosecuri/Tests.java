@@ -4,11 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
@@ -86,6 +88,7 @@ class Tests {
 
 		indexPage.start();
 
+		// FIXME
 		while (Thread.activeCount() != 3) {
 			Thread.sleep(1);
 		}
@@ -121,20 +124,54 @@ class Tests {
 	}
 
 	@Test
-	public void createGuardsPage() throws InterruptedException {
+	public void createGuardsPage() throws InterruptedException, FileNotFoundException {
 		// Tests guardsPage
+
+		Map<String, Guard> expectedGuards = new HashMap<>();
 
 		for (Guard guard : guards) {
 			GuardPageFactory guardPage = new GuardPageFactory(cfg, guard);
+			// put filename and guard in hashmap expectedGuards
+			expectedGuards.put((guard.getFirstname().charAt(0) + guard.getLastname()).toLowerCase() + ".html", guard);
+
 			guardPage.start();
 		}
 
+		String lines = "";
+		int numberAnalyzedFiles = 0;
+		File publicFolder = new File(targetData);
+		File[] filesOut = publicFolder.listFiles();
+		for (File item : filesOut) {
+			for (Entry<String, Guard> expectedGuard : expectedGuards.entrySet()) {
+				if (expectedGuard.getKey().equals(item.getName())) {
+					Scanner scanner = new Scanner(item);
+					while (scanner.hasNextLine()) {
+						lines += scanner.nextLine();
+					}
+					scanner.close();
+
+					// Test that the properties of guard are in the guard html page
+
+					assertTrue(lines.contains(expectedGuard.getValue().getFirstname()));
+					assertTrue(lines.contains(expectedGuard.getValue().getLastname()));
+					assertTrue(lines.contains(expectedGuard.getValue().getJob()));
+
+					for (int i = 0; i < expectedGuard.getValue().getEquipments().size(); i++) {
+						assertTrue(lines.contains(expectedGuard.getValue().getEquipments().get(i).getName()));
+					}
+					numberAnalyzedFiles++;
+					lines = "";
+
+				}
+			}
+		}
+
+		// Test that all the guards html page were analyzed (relative to filename test)
+		assertEquals(guards.size(), numberAnalyzedFiles);
+
+		// verifier copycard id ?
+
+		// Tests thread
+
 	}
-
-	// Tests Copy Cards ID et HtPassword ?
-
-	// Tests corresponding names and file
-
-	// Tests thread
-
 }
