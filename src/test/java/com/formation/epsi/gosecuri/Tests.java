@@ -14,8 +14,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
+import org.apache.commons.lang3.ThreadUtils;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -24,13 +24,12 @@ import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
 import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
 import com.formation.epsi.gosecuri.factory.GuardPageFactory;
 import com.formation.epsi.gosecuri.factory.GuardsFactory;
-import com.formation.epsi.gosecuri.factory.HtmlFactory;
 import com.formation.epsi.gosecuri.factory.IndexPageFactory;
 import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
+import com.formation.epsi.gosecuri.util.CopyCardsId;
 
 import freemarker.template.Configuration;
-import freemarker.template.TemplateException;
 
 class Tests {
 
@@ -44,6 +43,7 @@ class Tests {
 	static List<Guard> guards = null;
 	static Configuration cfg = null;
 	static IndexPageFactory indexPage = null;
+	static CopyCardsId copyCardsId = null;
 
 	@BeforeAll
 	public static void setUp() throws IOException {
@@ -51,6 +51,7 @@ class Tests {
 		guards = GuardsFactory.create(equipments);
 		cfg = FreemarkerConfigurationFactory.create();
 		indexPage = new IndexPageFactory(cfg, guards);
+		copyCardsId = new CopyCardsId(guards);
 	}
 
 	@ParameterizedTest
@@ -72,25 +73,13 @@ class Tests {
 
 	}
 
-	@Disabled
-	@Test
-	public void createHtml() throws IOException, TemplateException {
-		// Test relative to the HtmlFactory create function
-		Map<String, Object> indexData = new HashMap<>();
-		indexData.put("title", "Accueil");
-		indexData.put("guards", guards);
-		assertTrue(HtmlFactory.create(cfg, indexData, templateIndex, targetIndex));
-	}
-
 	@Test
 	public void createIndexPage() throws IOException, InterruptedException {
 		// Tests relative to the IndexPage
 
 		indexPage.start();
 
-		// FIXME
-		while (Thread.activeCount() != 3) {
-			Thread.sleep(1);
+		while (ThreadUtils.findThreadsByName("index").size() != 0) {
 		}
 		int nbGuardsInIndexPage = 0;
 
@@ -136,6 +125,10 @@ class Tests {
 
 			guardPage.start();
 		}
+		int numberThreads = Thread.activeCount();
+
+		while (Thread.activeCount() == numberThreads - guards.size()) {
+		}
 
 		String lines = "";
 		int numberAnalyzedFiles = 0;
@@ -169,9 +162,28 @@ class Tests {
 		// Test that all the guards html page were analyzed (relative to filename test)
 		assertEquals(guards.size(), numberAnalyzedFiles);
 
-		// verifier copycard id ?
+	}
 
-		// Tests thread
+	@Test
+	public void testCopyCardsId() {
 
+		ArrayList<String> expectedCopyCardsFile = new ArrayList<>();
+		for (int i = 0; i < guards.size(); i++) {
+			expectedCopyCardsFile
+					.add((guards.get(i).getFirstname().charAt(0) + guards.get(i).getLastname()).toLowerCase() + ".jpg");
+		}
+
+		int numberFilesCopyCards = 0;
+
+		copyCardsId.start();
+		File publicImage = new File(targetData + "/images");
+		File[] filesOut = publicImage.listFiles();
+		for (File item : filesOut) {
+			if (expectedCopyCardsFile.contains(item.getName())) {
+				numberFilesCopyCards++;
+			}
+		}
+
+		assertEquals(numberFilesCopyCards, guards.size());
 	}
 }
