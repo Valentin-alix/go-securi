@@ -67,10 +67,10 @@
         <!-- Plugins -->
         <plugins>
             <!-- The Surefire Plugin is used during the test phase of the build lifecycle to execute the unit tests -->
-<!--            <plugin>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <version>3.0.0-M5</version>-->
-<!--            </plugin>-->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+           </plugin>
             <!-- Build a JAR from the current project -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
