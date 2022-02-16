@@ -23,7 +23,13 @@ node {
     }
     stage('Unit-Tests') {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
-        sh "./mvnw test"
+        sh "./mvn test"
+        }
+    }
+
+    post {
+        always {
+            junit 'build/reports/test.xml'
         }
     }
 }
