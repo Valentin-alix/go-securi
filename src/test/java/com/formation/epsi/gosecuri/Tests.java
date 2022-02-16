@@ -62,7 +62,7 @@ class Tests {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "0, Corinne, Berthier, Surveillance entrepôt, pmNd1ldFE7WTk" })
+	@CsvSource({ "0, Corinne, Berthier, Surveillance entrepÃ´t, pmNd1ldFE7WTk" })
 	public void createGuards(int input, String expectedFirstname, String expectedLastname, String expectedJob,
 			String expectedPassword) {
 		/* test return values of GuardsFactory */
