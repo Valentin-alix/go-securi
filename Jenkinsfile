@@ -18,4 +18,5 @@ node {
         steps {
             sh 'mvn test'
             }
+    }
 }
