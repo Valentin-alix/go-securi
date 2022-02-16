@@ -10,10 +10,10 @@ node {
         sh "chmod +x ./mvnw"
     }
 
-    stage('Cloner les sources')
-    {
-        URL git : 'https://gitlab.com/Valentin-alix/go-securi'
+    stage('Cloner les sources') {URL
+        git : 'https://gitlab.com/Valentin-alix/go-securi'
     }
+    
     stage('Build'){
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             sh "./mvnw package"
