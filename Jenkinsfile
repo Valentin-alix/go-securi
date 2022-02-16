@@ -18,10 +18,5 @@ node {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
         sh "./mvnw test"
         }
-        post {
-            always {
-                junit 'target/surefire-reports/TEST-*.xml'
-            }
-        }
     }
 }
