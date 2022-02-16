@@ -4,12 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
-import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
-import com.formation.epsi.gosecuri.factory.GuardPageFactory;
-import com.formation.epsi.gosecuri.factory.GuardsFactory;
-import com.formation.epsi.gosecuri.factory.HtpasswdFactory;
-import com.formation.epsi.gosecuri.factory.IndexPageFactory;
+import com.formation.epsi.gosecuri.factory.*;
 import com.formation.epsi.gosecuri.model.Equipment;
 import com.formation.epsi.gosecuri.model.Guard;
 import com.formation.epsi.gosecuri.util.CopyCardsId;
@@ -44,5 +39,9 @@ public class Main {
 		/* Create the htpassword file */
 		HtpasswdFactory htpasswd = new HtpasswdFactory(guards);
 		htpasswd.start();
+
+		/* Create the service worker file */
+		ServiceWorkerFactory serviceWorkerFactory = new ServiceWorkerFactory(cfg, guards);
+		serviceWorkerFactory.start();
 	}
 }

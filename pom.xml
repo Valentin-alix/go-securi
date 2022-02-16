@@ -67,10 +67,10 @@
         <!-- Plugins -->
         <plugins>
             <!-- The Surefire Plugin is used during the test phase of the build lifecycle to execute the unit tests -->
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-            </plugin>
+<!--            <plugin>-->
+<!--                <artifactId>maven-surefire-plugin</artifactId>-->
+<!--                <version>3.0.0-M5</version>-->
+<!--            </plugin>-->
             <!-- Build a JAR from the current project -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -163,7 +163,7 @@
                         <configuration>
                             <rules>
                                 <requireActiveProfile>
-                                    <profiles>target-dev,target-test,target-prod</profiles>
+                                    <profiles>target-dev,target-prod</profiles>
                                     <all>false</all>
                                 </requireActiveProfile>
                             </rules>
@@ -345,24 +345,6 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources/conf-dev</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <!-- Profile for the test environment -->
-        <profile>
-            <id>target-test</id>
-            <activation>
-                <property>
-                    <name>environnement</name>
-                    <value>test</value>
-                </property>
-            </activation>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources/conf-test</directory>
                         <filtering>true</filtering>
                     </resource>
                 </resources>

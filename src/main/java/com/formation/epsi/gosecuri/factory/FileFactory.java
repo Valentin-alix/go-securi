@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.ResourceBundle;
 
-public class HtmlFactory {
+public class FileFactory {
 
     private static final ResourceBundle resource = ResourceBundle.getBundle("info");
 

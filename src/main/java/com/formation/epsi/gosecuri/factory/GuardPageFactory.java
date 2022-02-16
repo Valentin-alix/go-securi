@@ -42,7 +42,7 @@ public class GuardPageFactory implements Runnable {
 			guardData.put("guard", guard);
 
 			/* Create html page guard */
-			HtmlFactory.create(cfg, guardData, templateGuard, String.format("%s.html", guard.getId()));
+			FileFactory.create(cfg, guardData, templateGuard, String.format("%s.html", guard.getId()));
 
 		} catch (IOException | TemplateException e) {
 			e.printStackTrace();

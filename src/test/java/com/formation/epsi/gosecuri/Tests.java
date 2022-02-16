@@ -124,10 +124,8 @@ class Tests {
 			expectedGuards.put((guard.getFirstname().charAt(0) + guard.getLastname()).toLowerCase() + ".html", guard);
 
 			guardPage.start();
-		}
-		int numberThreads = Thread.activeCount();
-
-		while (Thread.activeCount() == numberThreads - guards.size()) {
+			while (ThreadUtils.findThreadsByName(guard.getId()).size() != 0) {
+			}
 		}
 
 		String lines = "";

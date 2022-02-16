@@ -45,7 +45,7 @@ public class IndexPageFactory implements Runnable {
 			indexData.put("guards", guards);
 
 			/* Create index page */
-			HtmlFactory.create(cfg, indexData, templateIndex, targetIndex);
+			FileFactory.create(cfg, indexData, templateIndex, targetIndex);
 		} catch (IOException | TemplateException e) {
 			e.printStackTrace();
 		}

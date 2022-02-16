@@ -1,6 +1,10 @@
 HELP.md
 target/
-public/
+/public/css
+/public/images
+/public/*.html
+/public/sw.js
+/public/.htpasswd
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -34,3 +38,4 @@ build/
 ### VS Code ###
 .vscode/
 /node_modules/
+
