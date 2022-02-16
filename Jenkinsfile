@@ -27,9 +27,5 @@ node {
             }
         }
     }
-    post {
-            always {
-                junit 'build/reports/test.xml'
-            }
-        }
+
 }
