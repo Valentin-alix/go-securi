@@ -10,15 +10,14 @@ node {
     }
     stage('Build'){
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
-            sh "./mvnw compile"
+            sh "./mvn package"
+            archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
         }
     }
     stage('Unit-Tests') {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             if (env.SKIP_TESTS){
                 sh "./mvnw test"
-                sh "./mvn package"
-                archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
             }
         }
 
