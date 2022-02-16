@@ -10,7 +10,7 @@ node {
     }
     stage('Build'){
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
-            sh "./mvn package"
+            sh "./mvnw package"
             archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
         }
     }
