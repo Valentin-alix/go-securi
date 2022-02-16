@@ -21,11 +21,7 @@ node {
             }
         }
 
-        post {
-            always {
-                junit 'target/surefire-reports/TEST-*.xml'
-            }
-        }
+        
         
 
 }
