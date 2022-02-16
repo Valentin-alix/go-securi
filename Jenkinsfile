@@ -14,9 +14,9 @@ node {
             archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
         }
     }
-    stage('Test') {
-        steps {
-            sh 'mvn test'
-            }
-    }
+    stage('Unit-Tests') {
+        withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
+            sh "./mvnw test"
+        }
+
 }
