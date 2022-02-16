@@ -17,7 +17,9 @@ node {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             if (env.SKIP_TESTS){
                 sh "./mvnw test"
+                archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
             }
         }
+
     }
 }
