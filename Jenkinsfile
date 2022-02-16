@@ -8,10 +8,6 @@ node {
         }
         sh "chmod +x ./mvnw"
     }
-
-    stage('Cloner les sources') {URL
-        git : 'https://gitlab.com/remit-epsi/go-securi-data'
-    }
     
     stage('Build'){
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
