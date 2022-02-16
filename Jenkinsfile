@@ -23,7 +23,7 @@ node {
     }
     stage('Unit-Tests') {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
-        sh "./mvnw check"
+        sh "./mvnw test"
         }
     }
 
