@@ -20,9 +20,5 @@ node {
             sh "./mvnw test"
             }
         }
-
-        
-        
-
-}
+    }
 }
