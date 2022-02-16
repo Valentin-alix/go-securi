@@ -26,7 +26,6 @@ node {
         sh "./mvnw test"
         }
     }
-
     post {
         always {
             junit 'build/reports/test.xml'
