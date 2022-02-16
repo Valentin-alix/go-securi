@@ -11,7 +11,7 @@ node {
     }
 
     stage('Cloner les sources') {URL
-        git : 'https://gitlab.com/Valentin-alix/go-securi'
+        git : 'https://gitlab.com/remit-epsi/go-securi-data'
     }
     
     stage('Build'){
