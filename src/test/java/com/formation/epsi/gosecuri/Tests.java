@@ -16,11 +16,10 @@ import java.util.Scanner;
 
 import org.apache.commons.lang3.ThreadUtils;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.api.Disabled;
-
 
 import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
 import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
@@ -177,7 +176,7 @@ class Tests {
 		int numberFilesCopyCards = 0;
 
 		copyCardsId.start();
-		File publicImage = new File(targetData + "/images");
+		File publicImage = new File(targetData + "images");
 		File[] filesOut = publicImage.listFiles();
 		for (File item : filesOut) {
 			if (expectedCopyCardsFile.contains(item.getName())) {
