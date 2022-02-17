@@ -12,8 +12,12 @@ node {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             sh "./mvnw package -DskipTests=true"
             archiveArtifacts artifacts: 'target/gosecuri-1.0-SNAPSHOT.jar', fingerprint: true
+            sh "java -jar target/gosecuri-1.0-SNAPSHOT.jar"
 
         }
+    }
+    stage('Lancement'){
+        sh "java -jar target/gosecuri-1.0-SNAPSHOT.jar"
     }
     stage('Unit-Tests') {
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
