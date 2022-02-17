@@ -16,7 +16,7 @@ node {
 
         }
     }
-    stage('Lancement'){
+    stage('Lancement jar'){
         sh "java -jar target/gosecuri-1.0-SNAPSHOT.jar"
     }
     stage('Unit-Tests') {
