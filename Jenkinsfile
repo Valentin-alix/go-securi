@@ -9,7 +9,7 @@ node {
         sh "chmod +x ./mvnw"
     }
 
-    stage('Pré-Build')
+    stage('Pre-Build')
     {   
         withEnv(["PATH+jdk=${tool 'JAVA 11'}/bin"]){
             sh "npm install"
