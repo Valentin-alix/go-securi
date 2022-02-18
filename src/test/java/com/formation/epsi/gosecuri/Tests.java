@@ -176,7 +176,7 @@ class Tests {
 		int numberFilesCopyCards = 0;
 
 		copyCardsId.start();
-		File publicImage = new File(targetData + "images");
+		File publicImage = new File(targetData + "images/");
 		File[] filesOut = publicImage.listFiles();
 		for (File item : filesOut) {
 			if (expectedCopyCardsFile.contains(item.getName())) {
