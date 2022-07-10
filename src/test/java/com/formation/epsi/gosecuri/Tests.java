@@ -76,6 +76,7 @@ class Tests {
 	}
 
 	@Test
+	@Disabled
 	public void createIndexPage() throws IOException, InterruptedException {
 		// Tests relative to the IndexPage
 
@@ -115,6 +116,7 @@ class Tests {
 	}
 
 	@Test
+	@Disabled
 	public void createGuardsPage() throws InterruptedException, FileNotFoundException {
 		// Tests guardsPage
 
@@ -165,6 +167,7 @@ class Tests {
 	}
 
 	@Test
+	@Disabled
 	public void testCopyCardsId() {
 
 		ArrayList<String> expectedCopyCardsFile = new ArrayList<>();
