@@ -10,22 +10,29 @@ import org.junit.jupiter.api.Test;
 public class ConfigTests {
 
 	private static final ResourceBundle resource = ResourceBundle.getBundle("info");
-	public static String data = resource.getString("data.dir");
-	public static String dataStaff = resource.getString("data.file.staff");
-	public static String dataMaterial = resource.getString("data.file.material");
+	public static String dataFolder = resource.getString("data.dir");
+	public static String publicFolder = resource.getString("target.dir");
+	public static String templateFolder = resource.getString("templates.path");
+	public static String cssFolder = publicFolder + "css";
 
 	@Test
 	public void dataDirectoryTests() {
-		assertTrue(new File(data).exists());
+		assertTrue(new File(dataFolder).exists());
 	}
 
 	@Test
-	public void staffFileTest() {
-		assertTrue(new File(data + dataStaff).exists());
+	public void publicDirectoryTests() {
+		assertTrue(new File(publicFolder).exists());
 	}
 
 	@Test
-	public void materialFileTest() {
-		assertTrue(new File(data + dataMaterial).exists());
+	public void templateDirectoryTests() {
+		assertTrue(new File(templateFolder).exists());
 	}
+
+	@Test
+	public void cssDirectoryTests() {
+		assertTrue(new File(cssFolder).exists());
+	}
+
 }

@@ -16,10 +16,7 @@ import java.util.Scanner;
 
 import org.apache.commons.lang3.ThreadUtils;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import com.formation.epsi.gosecuri.factory.EquipmentsFactory;
 import com.formation.epsi.gosecuri.factory.FreemarkerConfigurationFactory;
@@ -36,7 +33,7 @@ class Tests {
 
 	// Récupération des données de info.properties
 	private static final ResourceBundle resource = ResourceBundle.getBundle("info");
-	static String templateIndex = resource.getString("template.index");
+
 	static String targetIndex = resource.getString("target.index");
 	static String targetData = resource.getString("target.dir");
 
@@ -55,28 +52,7 @@ class Tests {
 		copyCardsId = new CopyCardsId(guards);
 	}
 
-	@ParameterizedTest
-	@CsvSource({ "lampe, Lampe Torche", "cyno, Bandeau agent cynophile" })
-	public void createEquipments(String input, String expected) {
-		/* test return name of equipments */
-		assertEquals(equipments.get(input).getName(), expected);
-	}
-
-	@Disabled
-	@ParameterizedTest
-	@CsvSource({ "0, Corinne, Berthier, Surveillance entrepôt, pmNd1ldFE7WTk" })
-	public void createGuards(int input, String expectedFirstname, String expectedLastname, String expectedJob,
-			String expectedPassword) {
-		/* test return values of GuardsFactory */
-		assertEquals(guards.get(input).getFirstname(), expectedFirstname);
-		assertEquals(guards.get(input).getLastname(), expectedLastname);
-		assertEquals(guards.get(input).getJob(), expectedJob);
-		assertEquals(guards.get(input).getPassword(), expectedPassword);
-
-	}
-
 	@Test
-	@Disabled
 	public void createIndexPage() throws IOException, InterruptedException {
 		// Tests relative to the IndexPage
 
@@ -116,7 +92,6 @@ class Tests {
 	}
 
 	@Test
-	@Disabled
 	public void createGuardsPage() throws InterruptedException, FileNotFoundException {
 		// Tests guardsPage
 
@@ -138,6 +113,8 @@ class Tests {
 		File[] filesOut = publicFolder.listFiles();
 		for (File item : filesOut) {
 			for (Entry<String, Guard> expectedGuard : expectedGuards.entrySet()) {
+				System.out.println(expectedGuard.getKey());
+				System.out.println(item.getName());
 				if (expectedGuard.getKey().equals(item.getName())) {
 					Scanner scanner = new Scanner(item);
 					while (scanner.hasNextLine()) {
@@ -160,14 +137,12 @@ class Tests {
 				}
 			}
 		}
-
 		// Test that all the guards html page were analyzed (relative to filename test)
 		assertEquals(guards.size(), numberAnalyzedFiles);
 
 	}
 
 	@Test
-	@Disabled
 	public void testCopyCardsId() {
 
 		ArrayList<String> expectedCopyCardsFile = new ArrayList<>();
