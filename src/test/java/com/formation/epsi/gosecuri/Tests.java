@@ -113,8 +113,6 @@ class Tests {
 		File[] filesOut = publicFolder.listFiles();
 		for (File item : filesOut) {
 			for (Entry<String, Guard> expectedGuard : expectedGuards.entrySet()) {
-				System.out.println(expectedGuard.getKey());
-				System.out.println(item.getName());
 				if (expectedGuard.getKey().equals(item.getName())) {
 					Scanner scanner = new Scanner(item);
 					while (scanner.hasNextLine()) {

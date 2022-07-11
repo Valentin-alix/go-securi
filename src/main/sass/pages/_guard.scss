@@ -25,5 +25,12 @@
     padding-right: 20px;
     position: relative;
   }
+  &__check-left:after {
+    content: "🗹";
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
 }
 
