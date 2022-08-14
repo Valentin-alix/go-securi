@@ -54,6 +54,11 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.12.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.ecf</groupId>
+			<artifactId>org.apache.commons.codec</artifactId>
+			<version>1.9.0.v20170208-1614</version>
+		</dependency>
     </dependencies>
     <!-- Properties -->
     <properties>
